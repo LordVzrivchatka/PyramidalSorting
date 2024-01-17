@@ -14,7 +14,7 @@ namespace КУРСАЧ
 {
     public partial class Auth : Form
     {
-        public string LastAuthUser = "";
+
         Database DB = new Database("Data Source=dataBase.DB; Version = 3;");
         public Auth()
         {
@@ -42,7 +42,6 @@ namespace КУРСАЧ
             {
                 if (userAuthSucceess() == true)
                 {
-                    LastAuthUser = TextBoxPass.Text;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -73,7 +72,7 @@ namespace КУРСАЧ
         }
         private bool hasUser(string login, string password) //проверка существования пользователя
         {
-            return DB.CheckUser(login, password, false);
+            return DB.UserAuth(login, password);
         }
         private bool incorrectFiledsOnForm()
         {

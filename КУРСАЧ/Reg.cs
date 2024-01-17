@@ -27,12 +27,6 @@ namespace КУРСАЧ
         private void Form2_Load(object sender, EventArgs e)
         {
         }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void RegCreate_Click(object sender, EventArgs e)
         { 
 
@@ -56,7 +50,7 @@ namespace КУРСАЧ
             } 
             else 
             {
-                if (DB.CheckUser(RegLogin.Text, "---", true))
+                if (DB.CheckUser(RegLogin.Text))
                 {
                     MessageBox.Show("Такой пользователь уже существует. Войдите в аккаунт или придумайте новый логин.", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;

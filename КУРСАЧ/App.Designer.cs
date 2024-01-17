@@ -140,7 +140,6 @@
             this.Testb.Name = "Testb";
             this.Testb.Size = new System.Drawing.Size(292, 20);
             this.Testb.TabIndex = 22;
-            this.Testb.TextChanged += new System.EventHandler(this.Testb_TextChanged);
             // 
             // EnterRand
             // 

@@ -180,11 +180,6 @@ namespace КУРСАЧ
                 }
             }
         }
-
-        private void Testb_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }

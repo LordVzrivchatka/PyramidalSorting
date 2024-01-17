@@ -156,7 +156,6 @@
             this.RegPass2.PasswordChar = '*';
             this.RegPass2.Size = new System.Drawing.Size(222, 29);
             this.RegPass2.TabIndex = 18;
-            this.RegPass2.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // pictureBox4
             // 

@@ -14,7 +14,7 @@ namespace КУРСАЧ
     {
         private readonly string dataSource;
         private SQLiteConnection conn;
-
+        
         private static string GenMD5Hash(string user0, string password0)
         { //получение хэша пароля
             byte[] passwordBytes = Encoding.UTF8.GetBytes(user0.ToUpper() + password0);
@@ -77,7 +77,7 @@ namespace КУРСАЧ
         }
 
 
-        public bool CheckUser(string username, string password, bool anypass)
+        public bool CheckUser(string username)
         { 
             try
             {
@@ -86,21 +86,34 @@ namespace КУРСАЧ
                     conn.Open();
                 }
                 SQLiteCommand cmd = conn.CreateCommand();
-                if (anypass) 
-                {
-                    cmd.CommandText = string.Format("SELECT login, password, role"
+                cmd.CommandText = string.Format("SELECT login, password, role"
                     + " FROM users"
                     + " where login = '{0}'",
                     username.ToUpper());
-                }
-                else
+                
+                return cmd.ExecuteScalar() != null;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
+        }
+
+        public bool UserAuth(string username, string password)
+        {
+            try
+            {
+                if (conn.State != ConnectionState.Open)
                 {
+                    conn.Open();
+                }
+                SQLiteCommand cmd = conn.CreateCommand();
                     cmd.CommandText = string.Format("SELECT login, password, role"
                     + " FROM users"
                     + " where login = '{0}' AND"
                     + " password = '{1}'",
                     username.ToUpper(), GenMD5Hash(username, password));
-                }
                 return cmd.ExecuteScalar() != null;
             }
             catch (Exception e)
