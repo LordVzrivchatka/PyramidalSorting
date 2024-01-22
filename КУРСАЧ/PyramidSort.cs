@@ -10,54 +10,61 @@ namespace КУРСАЧ
     {
         public int[,] sort(int[] arr)
         {
-            string b = "";
-            string a = "";
-            int g = 0;
-            int row = 0;
-            int col = 0;
-            int n = arr.Length;
-
-
-            // Построение кучи (перегруппируем массив)
-            for (int i = n / 2 - 1; i >= 0; i--)
-                heapify(arr, n, i);
-
-
-            // Один за другим извлекаем элементы из кучи
-            for (int i = n - 1; i >= 0; i--)
+            try
             {
-                // Перемещаем текущий корень в конец
-                int temp = arr[0];
-                arr[0] = arr[i];
-                arr[i] = temp;
+                string b = "";
+                string a = "";
+                int g = 0;
+                int row = 0;
+                int col = 0;
+                int n = arr.Length;
 
-                // вызываем процедуру heapify на уменьшенной куче
-                heapify(arr, i, 0);
-                for (int k = 0; k < arr.Length; k++)
+
+                // Построение кучи (перегруппируем массив)
+                for (int i = n / 2 - 1; i >= 0; i--)
+                    heapify(arr, n, i);
+
+
+                // Один за другим извлекаем элементы из кучи
+                for (int i = n - 1; i >= 0; i--)
                 {
-                    b = (Convert.ToString(arr[k])) + " ";
+                    // Перемещаем текущий корень в конец
+                    int temp = arr[0];
+                    arr[0] = arr[i];
+                    arr[i] = temp;
 
-                    a = a + b;
+                    // вызываем процедуру heapify на уменьшенной куче
+                    heapify(arr, i, 0);
+                    for (int k = 0; k < arr.Length; k++)
+                    {
+                        b = (Convert.ToString(arr[k])) + " ";
 
+                        a = a + b;
+
+                    }
                 }
+                a = a.Remove(a.Length - 1);
+                int[] narr = Array.ConvertAll(a.Split(' '), int.Parse);
+                g = narr.Length / n;
+                int[,] outarr = new int[g, n];
+                for (int i = 0; i < narr.Length; i++)
+                {
+
+                    outarr[row, col] = narr[i];
+                    col++;
+                    if (col + 1 > n)
+                    {
+                        col = 0;
+                        row++;
+                    }
+                }
+
+                return outarr;
             }
-            a = a.Remove(a.Length - 1);
-            int[] narr = Array.ConvertAll(a.Split(' '), int.Parse);
-            g = narr.Length / n;
-            int[,] outarr = new int[g, n];
-            for (int i = 0; i < narr.Length; i++)
+            catch
             {
-
-                outarr[row, col] = narr[i];
-                col++;
-                if (col + 1 > n)
-                {
-                    col = 0;
-                    row++;
-                }
+                return null;
             }
-
-            return outarr;
         }
 
         // Процедура для преобразования в двоичную кучу поддерева с корневым узлом i, что является

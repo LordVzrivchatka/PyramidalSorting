@@ -17,7 +17,6 @@ namespace КУРСАЧ
     {
 
         Database DB = new Database ("Data Source=dataBase.DB; Version = 3;");
-        public string RegUser = "";
 
         public Reg()
         {
@@ -55,9 +54,9 @@ namespace КУРСАЧ
                     MessageBox.Show("Такой пользователь уже существует. Войдите в аккаунт или придумайте новый логин.", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                RegUser = RegLogin.Text;
                 DB.CreateUser(RegLogin.Text, RegPass1.Text);
                 this.DialogResult = DialogResult.OK;
+                MessageBox.Show("Вы были успешно зарегестрированы!", "Регистрация пользователя", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close(); 
             }
 
